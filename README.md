@@ -70,8 +70,18 @@ In the `Advanced` windows, I convered inherited permissions into explicit permis
 
 ![38  Disable inheritance](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/91242732-424b-4b2f-ad73-6cb35cc76985)
 
-Clicking on the `Add` button opened a new window that allowed me to add a new principal. The word principal is also referred to as a security principal, which is an "entity that can be authenticated by the operating system, such as a user account, a computer account, or a thread or process that runs in the security context of a user or computer account, or the security groups for these accounts" ([Microsoft](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-principals)). I clicked on `Select a principal` to add the security groups I created earlier. For the the `Accounting` share, I added the Accounting security group and for the `Personal` share I added the Personal security group. For both of these I granted them the following permissions: Modify, Read & Execute, List folder contents, Read, and Write. 
+Clicking on the `Add` button opened a new window that allowed me to add a new principal. The word principal is also referred to as a security principal, which is an "entity that can be authenticated by the operating system, such as a user account, a computer account, or a thread or process that runs in the security context of a user or computer account, or the security groups for these accounts" ([Microsoft](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-principals)). I clicked on `Select a principal` to add the security groups I created earlier. For the the `Accounting` share, I added the Accounting security group and for the `Personal` share I added the Personal security group. Furthermore, I added `helpdesk` to both shares so that the IT techs will have access to troubleshoot the shares if a user reports any issues. For both of these I granted them the following permissions: Modify, Read & Execute, List folder contents, Read, and Write. 
 
 ![46  Adding Accounting Security Group](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/21a8b15d-875b-4c98-8fc1-b1a0e6e662d5)
+
+As a reminder, the above steps are also repeated for the `Personal` shared folder as well. After the Principals/security groups have been applied, I clicked `Apply` to confirm the changes and clicked `OK` to close the window. I then went into the `Sharing` tab and clicked on the `Share...` button. This opens up the `Network access` window where I will change the permission level of `helpdesk`, `Personal`, and `Accounting` from Contribute to Read/Write. This ensures that when users from any of those group connect to the shares that they have the necessary permission to do so. 
+
+![44  Change to readwrite](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/6fd37517-6852-4d9a-afe8-6e6b8bc116a6)
+![45](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/485212a1-ffb7-4423-90f0-1209c820fcf6)
+
+With that, the sharing of the folders should be complete.
+
+# Connecting To The Shares
+
 
 
