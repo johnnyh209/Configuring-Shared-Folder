@@ -83,5 +83,27 @@ With that, the sharing of the folders should be complete.
 
 # Connecting To The Shares
 
+This last stage required me to map the users' systems to the shared folders. But first, I needed to make sure that the systems are enabled to detect and connect to shares, and share files. To do so, navigate through the following path: `Control Panel > Network and Internet > Network and Sharing Center > Advanced sharing settings`. From here, I made sure that `Turn on network discovery` and `Turn on file and printer sharing` are both enabled. 
 
+![48  Turn on network discovery and network sharing](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/f96f484a-f4e4-45d0-b0c6-9ff9277b3a30)
+
+With those settings enabled, I head into `File Explorer`. On the menu bar, I clicked on `Computer`, and then clicked on `Map network drive`. 
+
+![49  Map network drive](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/b93aee9b-234b-411e-9a2e-d1672a2bd0e2)
+
+Doing so opened the `Map Network Drive` window. Here, I chose a drive letter, `Z:`, and entered in the network path of the shared folder. To find this network path, go onto the system of which the shared folder was created on. Enter into the shared folder's `Properties` page, and into the `Sharing` tab like so:
+
+![43  Sharing, Share](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/677f8df2-139c-4a52-8908-4cc75c0bb26a)
+
+After entering in the network path, I kept the `Reconnect at sign-in` enabled and kept `Connect using different credentials` disabled and pressed `OK`. 
+
+![50  Map network drive part 2](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/51dc863c-f409-4540-aaad-f6016cd578a5)
+
+It was at this stage, however, that I couldn't map the drive. I received the error: "Windows cannot access \\server-name\folder-name". I wasn't sure what was causing the issue. I double checked to make sure that the shared folder has been shared. In an attempt to resolve this issue, I tried enabling SMB 1.0, but still continued to receive the same error. 
+
+![51  Turn on SMB](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/50836844-e78a-4ffc-a9a7-203eca831d5e)
+
+Furthermore, to make sure that I was able to communicate with Windows Server in which the shared folder resides, I opened `Command Prompt` and used the `Ping` command and found that the packets were sent from the Windows 10 Enterprise system to the Windows Server 2019 system. I then, however, noticed that the device name of Windows Server 2019 and the server name were different. The device name (as found in the `Local Server` page of Server Manager) was `WindowsServer-2019` while the server name (found in `All Servers` page of Server Manager) was `WINDOWSSERVER-2`. My thought process then turned to the possibility of a DNS resolution issue. That there is a possibility of issues occurring during resolution of the server name and the IP address due to the differing device name and server name on the share's network path. I first tried to connect the share using the following network path: `\\IP-Address\folder-name` where IP Address is the IP of Windows Server 2019. Doing so, I was able to successfully connect the share. I then tried using `\\WindowsServer-2019\folder-name` rather than `\\WINDOWSSERVER-2\folder-name` and that allowed me to connect the shares successfully as well. However, I could not figure out why the given network path didn't work.
+
+I decided, instead, to delete all of the current VMs and start from scratch. I once again created 1 Windows Server 2019 VM, and naming it `Server2019`. This time, I noticed that the device name and server name matched. I then created 3 Windows 10 Enterprise systems, set up the active directory, and recreated the same shares. When connecting to the `Accounting` share this time, I received another error that prevented me from connecting to the share. While looking through the `Properties` page of the `Accounting` and `Personal` shares, the `Everyone` group was missing. https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/cannot-access-shared-folder-file-explorer 
 
