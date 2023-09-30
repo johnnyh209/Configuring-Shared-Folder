@@ -47,4 +47,31 @@ I also created a second share named `Personal`. This is so that each user will h
 ![24  Summary v2](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/8a564b36-67e2-4575-a3fa-f5a1bcf9b0d5)
 ![25  List of Shares (With Personal share)](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/217ebc09-c7bf-4ed9-8107-0247e238ed1e)
 
+To determine what users I want to have access to these shares, I will be creating security groups. Security groups allow me to manage many users based on the level of rights and access to resources that they should be granted. For example, while I may have an organizational unit (OU) named `Employee` where I have grouped all of the employees into, I may not want all of then to have access to a shared drive. By dividing that OU into different security groups, I have more granular control to what users can access. For this project, I created two security groups named `Accounting` and `Personal`; these names were chosen to correlate with their respective shared drives for easier management.
+
+To create the security groups, I went into `Active Directory Users and Computers`, right-clicked on `Users`, clicked on `New`, and then clicked on `Group`. This will open the `New Object - Group` wizard. I filled out the `Group Name:` field and clicked the `OK` button to create the groups.
+
+![27  Create Security Group part 1](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/82aba6f7-9c08-4b1c-a50b-ccbf55061fd0)
+![28  Create Security Group part 2](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/c78fee85-6a73-497d-8e43-edffd277b795)
+![29  Create Security Group part 3](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/0d89cb8a-7dca-499d-b429-2fd96eed4b3e)
+
+Now that the two security groups have been created, I proceeded to add the appropriate users to these groups. For the `Accounting` security group, I will add both `Staff LabOrg` and `Staff2 LabOrg`. For the `Personal` security group, I will just be adding `Staff LabOrg`. To add members to the group, right-click on the name of the group, and click on `Properties`. In the `Properties` windows, go into the `Members` tab and click on `Add...`.  This will bring up the `Select Users, Contacts, Computers, Service Accounts, or Groups` window in which I entered in the name of the user I want to add into the group in the `Enter the object names to select` text box. You will have to do this on a per-user basis. The screenshots below only show the `Accounting` security group, but this process was replicated for any other security groups as well.
+
+![32  Right click, properties](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/d12be55b-7997-44ae-9d3b-dfbb0ae1db1d)
+![33  Members, Add](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/63dfc60b-faa9-4c57-b7bd-9ffc6a4d237e)
+![34  Adding Staff LabOrg](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/c635413d-648c-47f0-9c54-4af7d63304f6)
+![35  Staff LabOrg Added](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/0132716a-0119-4a9e-9a3e-12060e7ac4bb)
+
+With the users added to the security groups, my next step was to configure their permission levels. I will be using `File Explorer` to do so. Navigate through the following: `File Explorer > This PC > Department Share (E:) > Shares`. This will show you a list of shares. For each share, I right-clicked and clicked on `Properties`, went into the `Security` tab and clicked on `Advanced`. 
+
+![37  Share Properties part 1](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/ce6b62c2-90d5-43ad-9eb2-be08099132ed)
+
+In the `Advanced` windows, I convered inherited permissions into explicit permissions using the `Disable inheritance` button. Doing so allowed me to remove the `Users` principals from the list so that not all of the users will have access to the share. 
+
+![38  Disable inheritance](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/91242732-424b-4b2f-ad73-6cb35cc76985)
+
+Clicking on the `Add` button opened a new window that allowed me to add a new principal. The word principal is also referred to as a security principal, which is an "entity that can be authenticated by the operating system, such as a user account, a computer account, or a thread or process that runs in the security context of a user or computer account, or the security groups for these accounts" ([Microsoft](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-principals)). I clicked on `Select a principal` to add the security groups I created earlier. For the the `Accounting` share, I added the Accounting security group and for the `Personal` share I added the Personal security group. For both of these I granted them the following permissions: Modify, Read & Execute, List folder contents, Read, and Write. 
+
+![46  Adding Accounting Security Group](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/21a8b15d-875b-4c98-8fc1-b1a0e6e662d5)
+
 
