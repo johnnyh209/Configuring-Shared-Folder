@@ -111,9 +111,12 @@ I decided, instead, to delete all of the current VMs and start from scratch. I o
 
 I then clicked on `Add...`, typed in `Everyone` into the text box, and clicked `OK` to add the `Everyone` group to both the `Accounting` and `Personal` shares. After doing so, I first reattempted to connect to the `Accounting` share and was successful. By going to the `This PC` page on `File Explorer`, the shared drive should appear under `Network Locations`.
 
+![VirtualBoxVM_enFgz1bwnR](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/fc62048a-8e4d-4945-b679-dbb2775e89a6)
+
 I connected the `Personal` share differently. My plans for this share was to have it function as a home folder or personal share. What I mean by this is that within a department in a company, and in this case the Accounting department, where everyone in the department has access to the shared drive, each user will have their own drive named after them. I will be connecting the `Personal` share with the Windows 10 system using Server Manager on the Windows Server 2019 system. In Server Manager, I opened up `Active Directory Users and Computers`. I then located the users, and in my case, they were placed in the `Employee` OU. I then right clicked on the users, and then selected `Properties`. In the `Properties` page, I went to the `Profile` tab. In the `Profile` tab, under the `Home folder` section, I selected `Connect`, assigned a drive letter, and entered in the network path. The network path was the following: `\\Server2019\Personal\%username%`. This will not only connect the users to the `Personal` share, but will create a folder for the user within the share named after the user's username.
 
-![VirtualBoxVM_msUedyB7MV](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/1fe6a1a5-4596-4438-9b62-159b096b361c)
+![VirtualBoxVM_5hataBZfh6](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/c9d20c3b-4a1e-4f9b-9d1e-5c69b5e9919b)
 
 Once that is connected, I went back into each user's system and opened `File Explorer` to confirm that the `Personal` share has successfully connected.
 
+![VirtualBoxVM_v7nexN4TZb](https://github.com/johnnyh209/Configuring-Shared-Folder/assets/33064730/c45899d5-ff20-4a30-988b-de38754f010a)
